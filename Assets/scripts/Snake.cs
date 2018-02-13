@@ -23,49 +23,69 @@ public class Snake : MonoBehaviour {
 
 	bool IsPaused = false;
 
-	float LifeSpan = 1.0f;
+	float PauseTime = 1.0f;
+
+	string WhatDirection = "up";
 
 
 	
 	void Update() {
 		
 		if (IsPaused) {
-			LifeSpan -= 0.2f;
-			if (LifeSpan <= 0) {
+			PauseTime -= 0.2f;
+			if (PauseTime <= 0) {
 				IsPaused = false;
 			}
 		} else {
 			MovementLogic ();
-			LifeSpan = 1.0f;
+			KeepMoving ();
+			PauseTime = 1.0f;
 		}
-
 	}
-
 
 	void MovementLogic () {
 		IsPaused = false;
-		Vector3 speed = Vector3.zero;
 
 		if (Input.GetKey (LeftKey) && !IsPaused) {
-			speed.x = -600;
-			IsPaused = true;
+			WhatDirection = "left";
 		}
 
 		if (Input.GetKey (RightKey) && !IsPaused) {
-			speed.x = 600;
-			IsPaused = true;
+			WhatDirection = "right";
 		}
 
 		if (Input.GetKey (UpKey) && !IsPaused) {
-			speed.y = 600;
-			IsPaused = true;
+			WhatDirection = "up";
 		}
 
 		if (Input.GetKey (DownKey) && !IsPaused) {
+			WhatDirection = "down";
+		}
+	}
+
+	void KeepMoving() {
+		Vector3 speed = Vector3.zero;
+
+		if (WhatDirection == "left") {
+			speed.x = -600;
+			IsPaused = true;
+		} else if (WhatDirection == "right") {
+			speed.x = 600;
+			IsPaused = true;
+		} else if (WhatDirection == "up") {
+			speed.y = 600;
+			IsPaused = true;
+		} else {
 			speed.y = -600;
 			IsPaused = true;
 		}
 
 		transform.position = transform.position + speed * Time.deltaTime;
 	}
+
+
+
+
+
+
 }
