@@ -24,10 +24,14 @@ public class Snake : MonoBehaviour {
 	bool IsPaused = false;
 
 	public bool IsFood;
+	public bool IsLast;
+	public bool IsLeader;
 
 	float PauseTime = 2.0f;
 
 	string WhatDirection = "up";
+
+	Vector3 LastPosition;
 
 
 
@@ -47,6 +51,7 @@ public class Snake : MonoBehaviour {
 			} else {
 				MovementLogic ();
 				KeepMoving ();
+				FollowTheChunks ();
 				AnythingToEat ();
 				PauseTime = 2.0f;
 			}
@@ -100,13 +105,31 @@ public class Snake : MonoBehaviour {
 			float distance = toChunk.magnitude;
 			if (snake != this) {
 				if (distance <= 0.5f) {
-					Debug.Log ("I AM HERE!");
+					snake.IsFood = false;
+					FollowTheChunks ();
 				}			
 			}
 
 		}
 	}
 
+	void FollowTheChunks() {
+		if (IsLast) {
+			Vector3 subSpot = LastPosition;
+
+			if (WhatDirection == "up") {
+				subSpot.y = LastPosition.y - 0.5f;		
+			} else if (WhatDirection == "down") {
+				subSpot.y = LastPosition.y + 0.5f;
+			} else if (WhatDirection == "left") {
+				subSpot.x = LastPosition.x + 0.5f;
+			} else if (WhatDirection == "right") {
+				subSpot.x = LastPosition.x - 0.5f;		
+			}
+			LastPosition = transform.position;
+		}
+
+	}
 
 
 

@@ -226,11 +226,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 359334ec3744a4471a5d17a256639b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftKey: 0
-  RightKey: 0
-  UpKey: 0
-  DownKey: 0
+  LeftKey: 276
+  RightKey: 275
+  UpKey: 273
+  DownKey: 274
   IsFood: 1
+  IsLast: 0
+  IsLeader: 0
 --- !u!4 &474135882
 Transform:
   m_ObjectHideFlags: 0
@@ -318,6 +320,8 @@ MonoBehaviour:
   UpKey: 273
   DownKey: 274
   IsFood: 0
+  IsLast: 0
+  IsLeader: 0
 --- !u!4 &1144813897
 Transform:
   m_ObjectHideFlags: 0
