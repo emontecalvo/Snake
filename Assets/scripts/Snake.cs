@@ -23,24 +23,35 @@ public class Snake : MonoBehaviour {
 
 	bool IsPaused = false;
 
-	float PauseTime = 1.0f;
+	public bool IsFood;
+
+	float PauseTime = 2.0f;
 
 	string WhatDirection = "up";
 
 
+
+
+	void Start() {
+		ChunkManager.inst.Register (this);
+	}
 	
 	void Update() {
-		
-		if (IsPaused) {
-			PauseTime -= 0.2f;
-			if (PauseTime <= 0) {
-				IsPaused = false;
+
+		if (!IsFood) {
+			if (IsPaused) {
+				PauseTime -= 0.2f;
+				if (PauseTime <= 0) {
+					IsPaused = false;
+				}
+			} else {
+				MovementLogic ();
+				KeepMoving ();
+				AnythingToEat ();
+				PauseTime = 2.0f;
 			}
-		} else {
-			MovementLogic ();
-			KeepMoving ();
-			PauseTime = 1.0f;
 		}
+
 	}
 
 	void MovementLogic () {
@@ -67,23 +78,34 @@ public class Snake : MonoBehaviour {
 		Vector3 speed = Vector3.zero;
 
 		if (WhatDirection == "left") {
-			speed.x = -600;
+			speed.x = -0.5f;
 			IsPaused = true;
 		} else if (WhatDirection == "right") {
-			speed.x = 600;
+			speed.x = 0.5f;
 			IsPaused = true;
 		} else if (WhatDirection == "up") {
-			speed.y = 600;
+			speed.y = 0.5f;
 			IsPaused = true;
 		} else {
-			speed.y = -600;
+			speed.y = -0.5f;
 			IsPaused = true;
 		}
 
-		transform.position = transform.position + speed * Time.deltaTime;
+		transform.position = transform.position + speed;
 	}
 
+	void AnythingToEat() {
+		foreach (Snake snake in ChunkManager.inst.AllChunks) {
+			Vector3 toChunk = snake.transform.position - transform.position;
+			float distance = toChunk.magnitude;
+			if (snake != this) {
+				if (distance <= 0.5f) {
+					Debug.Log ("I AM HERE!");
+				}			
+			}
 
+		}
+	}
 
 
 
