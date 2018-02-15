@@ -16,7 +16,6 @@ public class Snake : MonoBehaviour {
 		}
 	}
 
-
 	public KeyCode LeftKey;
 	public KeyCode RightKey;
 	public KeyCode UpKey;
@@ -25,12 +24,12 @@ public class Snake : MonoBehaviour {
 	public GameObject ChunkPrefab;
 
 	bool IsPaused = false;
-
 	float PauseTime = 2.0f;
 
 	string WhatDirection = "up";
 
-	Vector3 LastPosition;
+	public Vector3 CurrentSnakePosition;
+	public Vector3 LastSnakePosition;
 
 
 	void Update() {
@@ -46,11 +45,9 @@ public class Snake : MonoBehaviour {
 			AnythingToEat ();
 			PauseTime = 2.0f;
 		}
-
 	}
 
 	void InputLogic () {
-
 		if (Input.GetKeyDown (LeftKey)) {
 			WhatDirection = "left";
 		}
@@ -93,14 +90,7 @@ public class Snake : MonoBehaviour {
 			Vector3 toFood = food.transform.position - transform.position;
 			float distance = toFood.magnitude;
 			if (distance <= 0.5f) {
-				Debug.Log ("IT'S FOOD");
 				GameObject chunk = (GameObject)Instantiate (ChunkPrefab);
-
-				Vector3 temp = transform.position;
-				temp.y += 1.0f;
-				temp.x += 1.0f;
-				chunk.transform.position = temp;
-				transform.position = temp;
 			}
 		}
 	}
