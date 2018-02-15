@@ -16,16 +16,13 @@ public class Snake : MonoBehaviour {
 		}
 	}
 
+
 	public KeyCode LeftKey;
 	public KeyCode RightKey;
 	public KeyCode UpKey;
 	public KeyCode DownKey;
 
 	bool IsPaused = false;
-
-	public bool IsFood;
-	public bool IsLast;
-	public bool IsLeader;
 
 	float PauseTime = 2.0f;
 
@@ -34,27 +31,18 @@ public class Snake : MonoBehaviour {
 	Vector3 LastPosition;
 
 
-
-
-	void Start() {
-		ChunkManager.inst.Register (this);
-	}
-	
 	void Update() {
 		InputLogic ();
-
-		if (!IsFood) {
-			if (IsPaused) {
-				PauseTime -= 0.2f;
-				if (PauseTime <= 0) {
-					IsPaused = false;
-				}
-			} else {
-				MovementLogic ();
-				FollowTheChunks ();
-				AnythingToEat ();
-				PauseTime = 2.0f;
+	
+		if (IsPaused) {
+			PauseTime -= 0.2f;
+			if (PauseTime <= 0) {
+				IsPaused = false;
 			}
+		} else {
+			MovementLogic ();
+			AnythingToEat ();
+			PauseTime = 2.0f;
 		}
 
 	}
@@ -99,36 +87,32 @@ public class Snake : MonoBehaviour {
 	}
 
 	void AnythingToEat() {
-		foreach (Snake snake in ChunkManager.inst.AllChunks) {
-			Vector3 toChunk = snake.transform.position - transform.position;
-			float distance = toChunk.magnitude;
-			if (snake != this) {
-				if (distance <= 0.5f) {
-					snake.IsFood = false;
-					FollowTheChunks ();
-				}			
+		foreach (Food food in FoodMgr.inst.AllFood) {
+			Vector3 toFood = food.transform.position - transform.position;
+			float distance = toFood.magnitude;
+			if (distance <= 0.5f) {
+				Debug.Log ("IT'S FOOD");
 			}
-
 		}
 	}
 
-	void FollowTheChunks() {
-		if (IsLast) {
-			Vector3 subSpot = LastPosition;
-
-			if (WhatDirection == "up") {
-				subSpot.y = LastPosition.y - 0.5f;		
-			} else if (WhatDirection == "down") {
-				subSpot.y = LastPosition.y + 0.5f;
-			} else if (WhatDirection == "left") {
-				subSpot.x = LastPosition.x + 0.5f;
-			} else if (WhatDirection == "right") {
-				subSpot.x = LastPosition.x - 0.5f;		
-			}
-			LastPosition = transform.position;
-		}
-
-	}
+//	void FollowTheChunks() {
+//		if (IsLast) {
+//			Vector3 subSpot = LastPosition;
+//
+//			if (WhatDirection == "up") {
+//				subSpot.y = LastPosition.y - 0.5f;		
+//			} else if (WhatDirection == "down") {
+//				subSpot.y = LastPosition.y + 0.5f;
+//			} else if (WhatDirection == "left") {
+//				subSpot.x = LastPosition.x + 0.5f;
+//			} else if (WhatDirection == "right") {
+//				subSpot.x = LastPosition.x - 0.5f;		
+//			}
+//			LastPosition = transform.position;
+//		}
+//
+//	}
 
 
 

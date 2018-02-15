@@ -15,11 +15,11 @@ public class ChunkManager : MonoBehaviour {
 		}
 	}
 
-	public List <Snake> AllChunks = new List<Snake> ();
+	public List <Chunk> AllChunks = new List<Chunk> ();
 
-	public void Register (Snake snake) {
+	public void Register (Chunk chunk) {
 
-		AllChunks.Add (snake);
+		AllChunks.Add (chunk);
 
 	}
 }
