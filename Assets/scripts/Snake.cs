@@ -41,6 +41,7 @@ public class Snake : MonoBehaviour {
 	}
 	
 	void Update() {
+		InputLogic ();
 
 		if (!IsFood) {
 			if (IsPaused) {
@@ -50,7 +51,6 @@ public class Snake : MonoBehaviour {
 				}
 			} else {
 				MovementLogic ();
-				KeepMoving ();
 				FollowTheChunks ();
 				AnythingToEat ();
 				PauseTime = 2.0f;
@@ -59,27 +59,26 @@ public class Snake : MonoBehaviour {
 
 	}
 
-	void MovementLogic () {
-		IsPaused = false;
+	void InputLogic () {
 
-		if (Input.GetKey (LeftKey) && !IsPaused) {
+		if (Input.GetKeyDown (LeftKey)) {
 			WhatDirection = "left";
 		}
 
-		if (Input.GetKey (RightKey) && !IsPaused) {
+		if (Input.GetKeyDown (RightKey)) {
 			WhatDirection = "right";
 		}
 
-		if (Input.GetKey (UpKey) && !IsPaused) {
+		if (Input.GetKeyDown (UpKey)) {
 			WhatDirection = "up";
 		}
 
-		if (Input.GetKey (DownKey) && !IsPaused) {
+		if (Input.GetKeyDown (DownKey)) {
 			WhatDirection = "down";
 		}
 	}
 
-	void KeepMoving() {
+	void MovementLogic() {
 		Vector3 speed = Vector3.zero;
 
 		if (WhatDirection == "left") {
