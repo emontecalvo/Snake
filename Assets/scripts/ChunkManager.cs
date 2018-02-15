@@ -22,4 +22,6 @@ public class ChunkManager : MonoBehaviour {
 		AllChunks.Add (chunk);
 
 	}
+
+
 }

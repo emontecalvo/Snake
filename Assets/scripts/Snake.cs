@@ -22,6 +22,8 @@ public class Snake : MonoBehaviour {
 	public KeyCode UpKey;
 	public KeyCode DownKey;
 
+	public GameObject ChunkPrefab;
+
 	bool IsPaused = false;
 
 	float PauseTime = 2.0f;
@@ -92,6 +94,13 @@ public class Snake : MonoBehaviour {
 			float distance = toFood.magnitude;
 			if (distance <= 0.5f) {
 				Debug.Log ("IT'S FOOD");
+				GameObject chunk = (GameObject)Instantiate (ChunkPrefab);
+
+				Vector3 temp = transform.position;
+				temp.y += 1.0f;
+				temp.x += 1.0f;
+				chunk.transform.position = temp;
+				transform.position = temp;
 			}
 		}
 	}
@@ -114,6 +123,8 @@ public class Snake : MonoBehaviour {
 //
 //	}
 
+	void MakeANewChunk() {
 
+	}
 
 }
