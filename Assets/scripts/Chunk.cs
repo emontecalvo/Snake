@@ -27,6 +27,6 @@ public class Chunk : MonoBehaviour {
 	}
 
 	void ChunkMovement() {
-		
+		transform.position = Snake.inst.LastSnakePosition;
 	}
 }
