@@ -47,6 +47,7 @@ public class Snake : MonoBehaviour {
 		} else {
 			PauseTime = 2.0f;
 			BigUpdate ();
+			ChunkManager.inst.MoveTheChunks ();
 		}
 	}
 
@@ -64,7 +65,7 @@ public class Snake : MonoBehaviour {
 		// Time.frameCount = integer representing which frame it is
 		// Time.time = time since you pushed play (seconds since game started)
 		// Time.deltaTime = seconds since the last update
-		Debug.LogFormat("BigUpdate: {0}, time: {1}, deltaTime: {2} ", Time.frameCount, Time.time, Time.deltaTime);
+//		Debug.LogFormat("BigUpdate: {0}, time: {1}, deltaTime: {2} ", Time.frameCount, Time.time, Time.deltaTime);
 	}
 
 	void InputLogic () {
