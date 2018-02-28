@@ -14,5 +14,15 @@ public class Food : MonoBehaviour {
 		
 	}
 
+	public void FoodEaten() {
+		Destroy (gameObject);
+	}
+
+	void OnDestroy() {
+		if (FoodMgr.inst != null) {
+			FoodMgr.inst.Unregister (this);
+		}
+	}
+
 
 }

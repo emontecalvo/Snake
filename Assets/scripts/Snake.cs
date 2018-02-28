@@ -112,30 +112,10 @@ public class Snake : MonoBehaviour {
 			float distance = toFood.magnitude;
 			if (distance <= 0.5f) {
 				GameObject chunk = (GameObject)Instantiate (ChunkPrefab);
+				food.FoodEaten ();
 			}
 		}
 	}
 
-//	void FollowTheChunks() {
-//		if (IsLast) {
-//			Vector3 subSpot = LastPosition;
-//
-//			if (WhatDirection == "up") {
-//				subSpot.y = LastPosition.y - 0.5f;		
-//			} else if (WhatDirection == "down") {
-//				subSpot.y = LastPosition.y + 0.5f;
-//			} else if (WhatDirection == "left") {
-//				subSpot.x = LastPosition.x + 0.5f;
-//			} else if (WhatDirection == "right") {
-//				subSpot.x = LastPosition.x - 0.5f;		
-//			}
-//			LastPosition = transform.position;
-//		}
-//
-//	}
-
-	void MakeANewChunk() {
-
-	}
 
 }

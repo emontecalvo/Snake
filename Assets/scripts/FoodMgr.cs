@@ -22,4 +22,8 @@ public class FoodMgr : MonoBehaviour {
 		AllFood.Add (food);
 
 	}
+
+	public void Unregister (Food food) {
+		AllFood.Remove (food);
+	}
 }
