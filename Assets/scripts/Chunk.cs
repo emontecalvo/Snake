@@ -12,6 +12,8 @@ public class Chunk : MonoBehaviour {
 	void Start() {
 		ChunkManager.inst.Register (this);
 
+		transform.position = Snake.inst.LastSnakePosition;
+
 //		if (ChunkManager.inst.AllChunks.Count == 1) {
 //			AmILast = true;
 //			Vector3 temp = Snake.inst.transform.position;
