@@ -15,6 +15,8 @@ public class FoodMgr : MonoBehaviour {
 		}
 	}
 
+	public GameObject FoodPrefab;
+
 	public List <Food> AllFood = new List<Food> ();
 
 	public void Register (Food food) {
@@ -25,5 +27,13 @@ public class FoodMgr : MonoBehaviour {
 
 	public void Unregister (Food food) {
 		AllFood.Remove (food);
+		MakeNewFood ();
+	}
+
+	void MakeNewFood() {
+		GameObject food = (GameObject)Instantiate (FoodPrefab);
+		Vector3 position = new Vector3(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f), 0);
+		food.transform.position = position;
+
 	}
 }
