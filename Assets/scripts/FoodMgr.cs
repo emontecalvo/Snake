@@ -32,7 +32,7 @@ public class FoodMgr : MonoBehaviour {
 
 	void MakeNewFood() {
 		GameObject food = (GameObject)Instantiate (FoodPrefab);
-		Vector3 position = new Vector3(Random.Range(-10.0f, 10.0f), Random.Range(-10.0f, 10.0f), 0);
+		Vector3 position = new Vector3(Random.Range(-8.75f, 8.69f), Random.Range(-4.07f, 6.02f), 0);
 		food.transform.position = position;
 
 	}
