@@ -33,7 +33,29 @@ public class FoodMgr : MonoBehaviour {
 	void MakeNewFood() {
 		GameObject food = (GameObject)Instantiate (FoodPrefab);
 		Vector3 position = new Vector3(Random.Range(-8.75f, 8.69f), Random.Range(-4.07f, 6.02f), 0);
-		food.transform.position = position;
 
+		int overlapCounter = 0;
+		if (position == Snake.inst.CurrentSnakePosition) {
+			overlapCounter += 1;
+		}
+		for (int i = 0; i < ChunkManager.inst.AllChunks.Count; i++) {
+			if (position == ChunkManager.inst.AllChunks [i].CurrentChunkPosition) {
+				overlapCounter += 1;
+			}
+		}
+
+		while (overlapCounter > 0) {
+			position = new Vector3(Random.Range(-8.75f, 8.69f), Random.Range(-4.07f, 6.02f), 0);
+			overlapCounter = 0;
+			if (position == Snake.inst.CurrentSnakePosition) {
+				overlapCounter += 1;
+			}
+			for (int i = 0; i < ChunkManager.inst.AllChunks.Count; i++) {
+				if (position == ChunkManager.inst.AllChunks [i].CurrentChunkPosition) {
+					overlapCounter += 1;
+				}
+			}
+		}
+		food.transform.position = position;
 	}
 }
