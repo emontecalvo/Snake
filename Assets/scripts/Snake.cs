@@ -47,6 +47,7 @@ public class Snake : MonoBehaviour {
 		} else {
 			PauseTime = 2.0f;
 			BigUpdate ();
+			ChunkManager.inst.AreChunksTouching (transform.position);
 			ChunkManager.inst.MoveTheChunks ();
 		}
 	}
