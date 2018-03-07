@@ -16,6 +16,10 @@ public class Snake : MonoBehaviour {
 		}
 	}
 
+	public GameObject GameOver;
+
+	public Text PointsTxt;
+
 	public KeyCode LeftKey;
 	public KeyCode RightKey;
 	public KeyCode UpKey;
@@ -33,6 +37,7 @@ public class Snake : MonoBehaviour {
 
 	void Start() {
 		CurrentSnakePosition = transform.position;
+		GameOver.SetActive (false);
 	}
 
 
@@ -52,9 +57,22 @@ public class Snake : MonoBehaviour {
 		}
 	}
 
+	void WallCheck() {
+		if (CurrentSnakePosition.x < -8.75f) {
+			GameOver.SetActive (true);
+		} else if (CurrentSnakePosition.x > 8.69f) {
+			GameOver.SetActive (true);
+		} else if (CurrentSnakePosition.y < -4.07f) {
+			GameOver.SetActive (true);
+		} else if (CurrentSnakePosition.y > 6.02f) {
+			GameOver.SetActive (true);
+		}
+	}
+
 	void BigUpdate() {
 		// set last position
 		LastSnakePosition = CurrentSnakePosition;
+		WallCheck ();
 		MovementLogic ();
 		// set current position
 		CurrentSnakePosition = transform.position;
@@ -114,6 +132,10 @@ public class Snake : MonoBehaviour {
 			if (distance <= 0.5f) {
 				GameObject chunk = (GameObject)Instantiate (ChunkPrefab);
 				food.FoodEaten ();
+				int points = int.Parse(PointsTxt.text);
+				points += 1;
+				PointsTxt.text = points.ToString ();
+				Debug.Log ("POINTS:    " + points);
 			}
 		}
 	}

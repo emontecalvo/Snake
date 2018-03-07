@@ -17,11 +17,16 @@ public class ChunkManager : MonoBehaviour {
 
 	public List <Chunk> AllChunks = new List<Chunk> ();
 	public List <Vector3> AllChunkPositions = new List<Vector3> ();
+	public GameObject GameOver;
 
 	public void Register (Chunk chunk) {
 
 		AllChunks.Add (chunk);
 
+	}
+
+	void Start() {
+		GameOver.SetActive (false);
 	}
 
 
@@ -61,6 +66,7 @@ public class ChunkManager : MonoBehaviour {
 	public void AreChunksTouching(Vector3 chunk) {
 		if (AllChunkPositions.IndexOf (chunk) != -1) {
 			Debug.Log ("***** GAME OVER ****");
+			GameOver.SetActive (true);
 		} else {
 			AllChunkPositions.Add (chunk);
 		}
